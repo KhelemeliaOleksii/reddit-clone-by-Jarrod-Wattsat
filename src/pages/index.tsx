@@ -1,5 +1,9 @@
+import { useUser } from '@/context/AuthContext';
 import Typography from '@mui/material/Typography';
 export default function Home() {
+    const { user } = useUser();
+    console.log("Index page", user);
+
     return (
         <Typography variant='h1'>
             HelloWorld

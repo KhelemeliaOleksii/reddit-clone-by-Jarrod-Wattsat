@@ -6,8 +6,8 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { useUser } from '@/context/AuthContext';
 import { useRouter } from 'next/router';
-import { ISignUpResult } from 'amazon-cognito-identity-js';
-
+import { CognitoUser } from 'amazon-cognito-identity-js';
+// import { SignInParameters } from 'amazon-cognito-identity-js';
 const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
     ref,
@@ -16,13 +16,11 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 interface IFormInput {
-    username: string;
     password: string;
-    email: string;
-    code: string;
+    username: string;
 }
 
-const SignUp = () => {
+const SignIn = () => {
     const [openErrorContainer, setOpenErrorContainer] = useState(false);
     const [authError, setAuthError] = useState<string>('');
     const { setCandidate } = useUser();
@@ -32,12 +30,12 @@ const SignUp = () => {
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
-            const candidate = await signUpWithEmailAndPassword(data);
-            router.push("/signupConfirm");
+            const candidate = await signInWithEmailAndPassword(data);
+            router.push("/");
         } catch (error) {
             console.log(error);
             setOpenErrorContainer(true);
-            setAuthError("Signup Error!");
+            setAuthError("Login Error!");
         }
     }
 
@@ -48,21 +46,11 @@ const SignUp = () => {
         setOpenErrorContainer(false);
     };
 
-    async function signUpWithEmailAndPassword({ username, password, email }: IFormInput): Promise<ISignUpResult | never> {
+    async function signInWithEmailAndPassword({ username, password }: IFormInput): Promise<CognitoUser | never> {
         try {
-            const candidate = await Auth.signUp({
-                username,
-                password,
-                attributes: {
-                    email, // optional
-                },
-            });
-            setCandidate(candidate.user);
+            const candidate = await Auth.signIn(username, password);
             return candidate;
         } catch (error: any) {
-            if (error['code'] === "UsernameExistsException") {
-                throw new Error("Email is in use!")
-            }
             if (error['code'] === "InvalidParameterException") {
                 throw new Error("Inputed parameters are invalid")
             }
@@ -107,24 +95,6 @@ const SignUp = () => {
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="email"
-                        label="Email"
-                        type="email"
-                        variant="standard"
-                        error={errors.email ? true : false}
-                        helperText={errors.email ? errors.email.message : null}
-                        autoComplete="off"
-                        {...register("email", {
-                            required: {
-                                value: true,
-                                message: "Please, enter an email",
-                            },
-                        })}
-                    />
-                    {/* {errors.userName && errors.userName.message} */}
-                </Grid>
-                <Grid item>
-                    <TextField
                         id="password"
                         label="Password"
                         type="password"
@@ -154,7 +124,7 @@ const SignUp = () => {
 
                 <Grid style={{ marginTop: 16 }}>
                     <Button variant="contained" type="submit">
-                        Sign up
+                        Login
                     </Button>
                 </Grid>
 
@@ -169,4 +139,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp;
+export default SignIn;
