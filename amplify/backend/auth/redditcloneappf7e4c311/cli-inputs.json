@@ -1,8 +1,6 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "redditcloneappf7e4c311_identitypool_f7e4c311",
-    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "redditf7e4c311",
     "userPoolName": "redditcloneappf7e4c311_userpool_f7e4c311",
     "autoVerifiedAttributes": [
@@ -35,14 +33,59 @@
     "userpoolClientSetAttributes": false,
     "sharedId": "f7e4c311",
     "resourceName": "redditcloneappf7e4c311",
-    "authSelections": "identityPoolAndUserPool",
-    "useDefault": "default",
+    "authSelections": "userPoolOnly",
+    "useDefault": "manual",
     "usernameAttributes": [
       "email"
     ],
-    "userPoolGroupList": [],
+    "userPoolGroupList": [
+      "testUsers"
+    ],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
-    "useEnabledMfas": true
+    "useEnabledMfas": true,
+    "authRoleArn": {
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
+    },
+    "unauthRoleArn": {
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
+    },
+    "breakCircularDependency": true,
+    "dependsOn": [
+      {
+        "category": "function",
+        "resourceName": "redditcloneappf7e4c311CustomMessage",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      }
+    ],
+    "userPoolGroups": true,
+    "adminQueries": true,
+    "triggers": {
+      "CustomMessage": [
+        "verification-link"
+      ]
+    },
+    "hostedUI": true,
+    "hostedUIDomainName": "redditcloneappc361096b-c361096b",
+    "authProvidersUserPool": [],
+    "hostedUIProviderMeta": "[]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/signin/\"],\"LogoutURLs\":[\"http://localhost:3000/signout/\"]}",
+    "verificationBucketName": "redditcloneappf7e4c311verificationbucket",
+    "authProviders": [],
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"CustomMessage\",\n    \"lambdaFunctionName\": \"redditcloneappf7e4c311CustomMessage\"\n  }\n]",
+    "permissions": []
   }
 }
