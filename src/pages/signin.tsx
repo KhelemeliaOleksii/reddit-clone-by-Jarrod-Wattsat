@@ -23,11 +23,13 @@ interface IFormInput {
 const SignIn = () => {
     const [openErrorContainer, setOpenErrorContainer] = useState(false);
     const [authError, setAuthError] = useState<string>('');
-    const { setCandidate } = useUser();
+    const { user, setCandidate } = useUser();
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>()
 
     const router = useRouter();
-
+    if (user) {
+        router.push('/');
+    }
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
         try {
             const candidate = await signInWithEmailAndPassword(data);

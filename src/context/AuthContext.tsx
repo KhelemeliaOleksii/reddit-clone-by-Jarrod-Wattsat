@@ -19,6 +19,7 @@ interface IUserContext {
 }
 
 const UserContext = createContext<IUserContext>({} as IUserContext);
+// const UserContext = createContext<Partial<IUserContext>>({});
 
 interface IProps {
     children: React.ReactElement;
@@ -29,9 +30,13 @@ export default function AuthContext({ children }: IProps): ReactElement {
     const [candidate, setCandidate] = useState<CognitoUser | null>(null);
     const needFetchUser = useRef(true);
 
+    /**
+     * @description  - to check user immediatly after a component have builded; \
+     *              - to create Hublistener on authorization events (login, logout, checkCurrentUser etc.);  \
+     *              - after the first time using this code is blocked by flag: needFetchUser = false; \
+     *              - before the component have unmounted the authorization Hublistener has been removed;
+     *  */
     useEffect(() => {
-        // console.log(`Context component. UseEffect on [user, isUserFullConfirmed] change:\n 
-        //         \ username ${user?.getUsername()}, needFetchUser: ${needFetchUser.current}.`);
         let removeHubListener = (): void => { };
         if (needFetchUser.current) {
             checkUser();
@@ -47,7 +52,6 @@ export default function AuthContext({ children }: IProps): ReactElement {
                 const amplifyUser = await Auth.currentAuthenticatedUser();
                 setUser(amplifyUser);
             } catch (error) {
-                console.error(error);
                 setUser(null);
             }
         }

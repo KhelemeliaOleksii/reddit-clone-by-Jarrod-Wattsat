@@ -24,11 +24,14 @@ interface IFormInput {
 const ConfirmSignUp = () => {
     const [isErrorContainerOpened, setIsErrorContainerOpened] = useState(false);
     const [authError, setAuthError] = useState<string>('');
-    const { candidate, setCandidate } = useUser();
+    const { user, candidate, setCandidate } = useUser();
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>()
 
     const candidateName = candidate?.getUsername();
     const router = useRouter();
+    if (user) {
+        router.push('/');
+    }
 
     const onSubmit: SubmitHandler<IFormInput> = async ({ username, code }) => {
         try {
