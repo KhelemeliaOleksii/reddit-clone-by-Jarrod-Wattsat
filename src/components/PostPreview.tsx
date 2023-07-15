@@ -41,7 +41,7 @@ const PostPreview = ({ post }: IProps): ReactElement => {
                 <Grid item>
                     <Grid container direction="column" alignItems={"flex-start"}>
                         <Grid item>
-                            <Typography variant="body1">Posted by <b>{post.owner}</b> at <b>{post.createdAt}</b> </Typography>
+                            <Typography variant="body1">Posted by <b>{post.postOwner}</b> at <b>{post.createdAt}</b> </Typography>
                         </Grid>
                         <Grid item>
                             <Typography variant="body1">at {post.createdAt} </Typography>

@@ -5,11 +5,15 @@
 export const onCreatePost = /* GraphQL */ `
   subscription OnCreatePost(
     $filter: ModelSubscriptionPostFilterInput
-    $owner: String
+    $postOwner: String
   ) {
-    onCreatePost(filter: $filter, owner: $owner) {
+    onCreatePost(filter: $filter, postOwner: $postOwner) {
       id
       title
+      content
+      image
+      upvotes
+      downvotes
       comments {
         items {
           id
@@ -17,7 +21,7 @@ export const onCreatePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          owner
+          commentOwner
           __typename
         }
         nextToken
@@ -25,7 +29,7 @@ export const onCreatePost = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
+      postOwner
       __typename
     }
   }
@@ -33,11 +37,15 @@ export const onCreatePost = /* GraphQL */ `
 export const onUpdatePost = /* GraphQL */ `
   subscription OnUpdatePost(
     $filter: ModelSubscriptionPostFilterInput
-    $owner: String
+    $postOwner: String
   ) {
-    onUpdatePost(filter: $filter, owner: $owner) {
+    onUpdatePost(filter: $filter, postOwner: $postOwner) {
       id
       title
+      content
+      image
+      upvotes
+      downvotes
       comments {
         items {
           id
@@ -45,7 +53,7 @@ export const onUpdatePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          owner
+          commentOwner
           __typename
         }
         nextToken
@@ -53,7 +61,7 @@ export const onUpdatePost = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
+      postOwner
       __typename
     }
   }
@@ -61,11 +69,15 @@ export const onUpdatePost = /* GraphQL */ `
 export const onDeletePost = /* GraphQL */ `
   subscription OnDeletePost(
     $filter: ModelSubscriptionPostFilterInput
-    $owner: String
+    $postOwner: String
   ) {
-    onDeletePost(filter: $filter, owner: $owner) {
+    onDeletePost(filter: $filter, postOwner: $postOwner) {
       id
       title
+      content
+      image
+      upvotes
+      downvotes
       comments {
         items {
           id
@@ -73,7 +85,7 @@ export const onDeletePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          owner
+          commentOwner
           __typename
         }
         nextToken
@@ -81,7 +93,7 @@ export const onDeletePost = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
+      postOwner
       __typename
     }
   }
@@ -89,15 +101,15 @@ export const onDeletePost = /* GraphQL */ `
 export const onCreateComment = /* GraphQL */ `
   subscription OnCreateComment(
     $filter: ModelSubscriptionCommentFilterInput
-    $owner: String
+    $commentOwner: String
   ) {
-    onCreateComment(filter: $filter, owner: $owner) {
+    onCreateComment(filter: $filter, commentOwner: $commentOwner) {
       id
       postID
       content
       createdAt
       updatedAt
-      owner
+      commentOwner
       __typename
     }
   }
@@ -105,15 +117,15 @@ export const onCreateComment = /* GraphQL */ `
 export const onUpdateComment = /* GraphQL */ `
   subscription OnUpdateComment(
     $filter: ModelSubscriptionCommentFilterInput
-    $owner: String
+    $commentOwner: String
   ) {
-    onUpdateComment(filter: $filter, owner: $owner) {
+    onUpdateComment(filter: $filter, commentOwner: $commentOwner) {
       id
       postID
       content
       createdAt
       updatedAt
-      owner
+      commentOwner
       __typename
     }
   }
@@ -121,15 +133,15 @@ export const onUpdateComment = /* GraphQL */ `
 export const onDeleteComment = /* GraphQL */ `
   subscription OnDeleteComment(
     $filter: ModelSubscriptionCommentFilterInput
-    $owner: String
+    $commentOwner: String
   ) {
-    onDeleteComment(filter: $filter, owner: $owner) {
+    onDeleteComment(filter: $filter, commentOwner: $commentOwner) {
       id
       postID
       content
       createdAt
       updatedAt
-      owner
+      commentOwner
       __typename
     }
   }

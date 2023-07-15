@@ -116,6 +116,22 @@
           "resourceName": "redditcloneappf7e4c311CustomMessage"
         }
       ]
+    },
+    "AMPLIFY_function_redditcloneappf7e4c311CustomMessage_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "redditcloneappf7e4c311CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_redditcloneappf7e4c311CustomMessage_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "redditcloneappf7e4c311CustomMessage"
+        }
+      ]
     }
   }
 }

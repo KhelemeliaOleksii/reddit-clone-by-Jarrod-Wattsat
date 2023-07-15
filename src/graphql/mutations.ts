@@ -10,6 +10,10 @@ export const createPost = /* GraphQL */ `
     createPost(input: $input, condition: $condition) {
       id
       title
+      content
+      image
+      upvotes
+      downvotes
       comments {
         items {
           id
@@ -17,7 +21,7 @@ export const createPost = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          owner
+          commentOwner
           __typename
         }
         nextToken
@@ -25,7 +29,7 @@ export const createPost = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
+      postOwner
       __typename
     }
   }
@@ -38,6 +42,10 @@ export const updatePost = /* GraphQL */ `
     updatePost(input: $input, condition: $condition) {
       id
       title
+      content
+      image
+      upvotes
+      downvotes
       comments {
         items {
           id
@@ -45,7 +53,7 @@ export const updatePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          owner
+          commentOwner
           __typename
         }
         nextToken
@@ -53,7 +61,7 @@ export const updatePost = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
+      postOwner
       __typename
     }
   }
@@ -66,6 +74,10 @@ export const deletePost = /* GraphQL */ `
     deletePost(input: $input, condition: $condition) {
       id
       title
+      content
+      image
+      upvotes
+      downvotes
       comments {
         items {
           id
@@ -73,7 +85,7 @@ export const deletePost = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          owner
+          commentOwner
           __typename
         }
         nextToken
@@ -81,7 +93,7 @@ export const deletePost = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
+      postOwner
       __typename
     }
   }
@@ -97,7 +109,7 @@ export const createComment = /* GraphQL */ `
       content
       createdAt
       updatedAt
-      owner
+      commentOwner
       __typename
     }
   }
@@ -113,7 +125,7 @@ export const updateComment = /* GraphQL */ `
       content
       createdAt
       updatedAt
-      owner
+      commentOwner
       __typename
     }
   }
@@ -129,7 +141,7 @@ export const deleteComment = /* GraphQL */ `
       content
       createdAt
       updatedAt
-      owner
+      commentOwner
       __typename
     }
   }

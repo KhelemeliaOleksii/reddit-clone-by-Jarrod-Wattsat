@@ -9,11 +9,13 @@
       "UnauthRoleName": "amplify-redditcloneapp-dev-95944-unauthRole",
       "StackName": "amplify-redditcloneapp-dev-95944",
       "StackId": "arn:aws:cloudformation:eu-north-1:047411748286:stack/amplify-redditcloneapp-dev-95944/5b82bed0-1a38-11ee-b865-06d0c59104d8",
-      "AmplifyAppId": "d38wl6q2drn05u"
+      "AmplifyAppId": "d38wl6q2drn05u",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-redditcloneapp-dev-95944-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
-        "redditcloneappf7e4c311": {}
+        "redditcloneappf7e4c311": {},
+        "userPoolGroups": {}
       },
       "api": {
         "redditcloneapp": {}
@@ -22,7 +24,9 @@
         "redditcloneappf7e4c311CustomMessage": {
           "REDIRECTURL": "http://localhost:3000/",
           "EMAILSUBJECT": "confirmation account on redditcloneapp",
-          "EMAILMESSAGE": ""
+          "EMAILMESSAGE": "",
+          "deploymentBucketName": "amplify-redditcloneapp-dev-95944-deployment",
+          "s3Key": "amplify-builds/redditcloneappf7e4c311CustomMessage-75707a3045412b75756a-build.zip"
         }
       }
     }
